@@ -1,0 +1,162 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #6B6FF5;
+  --color-secondary: #8B4CF7;
+  --color-accent: #00E0FF;
+  --color-success: #34D978;
+  --color-warning: #FBBF24;
+  --color-bg-dark: #0F1729;
+  --color-card-dark: #1A2440;
+  --font-sans: 'Calibri', 'Calibri Light', 'Trebuchet MS', 'Gill Sans', Arial, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+
+/* ── Base ── */
+html, body {
+  background-color: #0F1729;
+  color: #F0F4FF;
+  font-family: 'Calibri', 'Calibri Light', 'Trebuchet MS', 'Gill Sans', Arial, sans-serif;
+  font-size: 21px;          /* was 18px → +3 */
+  scroll-behavior: smooth;
+  line-height: 1.65;
+}
+
+/* ── Override Tailwind text-size utilities upward ── */
+.text-\[8px\]    { font-size: 11px !important; }
+.text-\[9px\]    { font-size: 12px !important; }
+.text-\[10px\]   { font-size: 13px !important; }
+.text-\[11px\]   { font-size: 14px !important; }
+.text-\[12px\]   { font-size: 15px !important; }
+.text-xs         { font-size: 15px !important; }
+.text-sm         { font-size: 17px !important; }
+.text-base       { font-size: 21px !important; }
+.text-lg         { font-size: 24px !important; }
+.text-xl         { font-size: 27px !important; }
+.text-2xl        { font-size: 31px !important; }
+.text-3xl        { font-size: 37px !important; }
+.text-4xl        { font-size: 43px !important; }
+.text-5xl        { font-size: 51px !important; }
+.text-6xl        { font-size: 63px !important; }
+
+/* ── Brighter text overrides ── */
+.text-slate-100  { color: #FFFFFF !important; }
+.text-slate-200  { color: #F0F4FF !important; }
+.text-slate-300  { color: #D8E0F8 !important; }
+.text-slate-400  { color: #A8B8D8 !important; }
+.text-slate-500  { color: #7A8EB8 !important; }
+.text-slate-600  { color: #5A6E98 !important; }
+.text-white      { color: #FFFFFF !important; }
+
+/* ── Lighter background overrides ── */
+.bg-bg-dark,
+.bg-\[\#0B1120\] { background-color: #0F1729 !important; }
+.bg-card-dark,
+.bg-\[\#161B33\] { background-color: #1A2440 !important; }
+.bg-slate-950    { background-color: #131E35 !important; }
+.bg-slate-900    { background-color: #1A2440 !important; }
+.bg-slate-800    { background-color: #253055 !important; }
+.bg-slate-700    { background-color: #304070 !important; }
+
+/* border colors slightly brighter */
+.border-white\/5  { border-color: rgba(255,255,255,0.09) !important; }
+.border-slate-700 { border-color: #304070 !important; }
+.border-slate-800 { border-color: #253055 !important; }
+
+/* ── Glassmorphism ── */
+.glass-panel {
+  background: rgba(26, 36, 64, 0.70);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.35);
+}
+
+.glass-panel-hover:hover {
+  background: rgba(26, 36, 64, 0.85);
+  border-color: rgba(107, 111, 245, 0.45);
+  box-shadow: 0 8px 32px 0 rgba(107, 111, 245, 0.18);
+  transform: translateY(-2px);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-input {
+  background: rgba(15, 23, 41, 0.65);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  color: #F0F4FF;
+  border-radius: 0.75rem;
+  transition: all 0.2s ease-in-out;
+}
+
+.glass-input:focus {
+  outline: none;
+  border-color: #6B6FF5;
+  box-shadow: 0 0 0 3px rgba(107, 111, 245, 0.25);
+  background: rgba(15, 23, 41, 0.85);
+}
+
+/* ── Prose overrides for lesson content ── */
+.prose-invert p,
+.prose-invert li,
+.prose-invert td {
+  color: #D8E0F8 !important;
+  font-size: 17px !important;
+  line-height: 1.75 !important;
+}
+
+.prose-invert h1, .prose-invert h2 { color: #FFFFFF !important; }
+.prose-invert h3 { color: #FFFFFF !important; font-size: 20px !important; }
+.prose-invert h4 { color: #00E0FF !important; font-size: 17px !important; }
+.prose-invert strong { color: #FFFFFF !important; }
+.prose-invert code { color: #00E0FF !important; font-size: 14px !important; }
+.prose-invert pre  { font-size: 14px !important; }
+
+/* ── Scrollbars ── */
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: #0F1729; }
+::-webkit-scrollbar-thumb {
+  background: rgba(107, 111, 245, 0.4);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover { background: rgba(107, 111, 245, 0.65); }
+
+/* ── Keyframes ── */
+@keyframes float {
+  0%   { transform: translateY(0px)   rotate(0deg); }
+  50%  { transform: translateY(-15px) rotate(3deg); }
+  100% { transform: translateY(0px)   rotate(0deg); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.45; transform: scale(1);   }
+  50%       { opacity: 0.75; transform: scale(1.1); }
+}
+
+.animate-float { animation: float 6s ease-in-out infinite; }
+.animate-glow  { animation: pulse-glow 8s ease-in-out infinite; }
+
+/* ── Gradient text ── */
+.text-gradient {
+  background: linear-gradient(135deg, #F0F4FF 30%, #00E0FF 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-gradient-purple {
+  background: linear-gradient(135deg, #6B6FF5 0%, #8B4CF7 50%, #00E0FF 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* ── Ensure Monaco editor text is visible ── */
+.monaco-editor .view-lines { font-size: 14px !important; }
+
+/* ── Card hover lift ── */
+.card-hover {
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.card-hover:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 40px rgba(107, 111, 245, 0.20);
+}
