@@ -529,11 +529,13 @@ export default function CoursePlayer({ user, initialDay, initialTopicId, onBackT
           {/* Topic list */}
           <div className="p-2 space-y-3">
             {dayData.modules.map((mod, mIdx) => (
-              <div key={mod.id} className="space-y-0.5">
-                <p className="text-[9px] text-slate-500 uppercase tracking-widest font-bold pl-2 pt-2">
-                  Module {mIdx + 1}
-                </p>
-                <p className="text-[10px] text-slate-400 font-semibold pl-2 pr-2 pb-1 truncate">{mod.title}</p>
+              <div key={mod.id} className="mb-4 space-y-1">
+                <div className="px-2 pt-4 pb-2">
+                  <span className="inline-block px-2.5 py-1 rounded bg-accent/20 text-accent text-xs font-black uppercase tracking-widest mb-2 border border-accent/30">
+                    Module {mIdx + 1}
+                  </span>
+                  <h4 className="text-[15px] font-extrabold text-white leading-tight drop-shadow-md">{mod.title}</h4>
+                </div>
 
                 {(mod.topics || []).map((top, tIdx) => {
                   const isActive = safeModIdx === mIdx && safeTopIdx === tIdx && activeTab === 'lesson';
