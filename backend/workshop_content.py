@@ -394,30 +394,50 @@ LangChain divides LLM workflows into modular nodes:
 
 ### Code Example: LCEL Chain
 ```python
-# Install: pip install langchain-google-genai langchain-core
+# 1_langchain_example.py
 import os
 from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import StrOutputParser
 
-# 1. Initialize the LLM (using LangChain's Gemini Wrapper)
-llm = ChatGoogleGenerativeAI(
-    model="gemini-1.5-flash",
-    temperature=0.3,
-    google_api_key=os.getenv("GEMINI_API_KEY")
-)
+"""
+# LangChain Example
+LangChain is a framework that makes it easy to build LLM applications by chaining together
+prompts, models, and output parsers using a clean, declarative syntax known as LangChain Expression Language (LCEL).
 
-# 2. Design Prompt Template
-prompt = ChatPromptTemplate.from_template(
-    "You are a professional chef. Suggest a signature recipe using these ingredients: {ingredients}."
-)
+This script demonstrates a basic chain:
+Prompt -> LLM -> String Output Parser
+"""
 
-# 3. Create Chain using LCEL (Pipe Syntax)
-chain = prompt | llm | StrOutputParser()
+def run_langchain_example():
+    # 1. Initialize the LLM (ensure GEMINI_API_KEY is set in your environment)
+    print("Initializing LLM...")
+    llm = ChatGoogleGenerativeAI(
+        model="gemini-1.5-flash",
+        temperature=0.3
+    )
 
-# 4. Invoke the chain
-recipe = chain.invoke({"ingredients": "eggs, tomatoes, and goat cheese"})
-print(recipe)
+    # 2. Design Prompt Template
+    prompt = ChatPromptTemplate.from_template(
+        "You are an expert tech teacher. Explain the concept of {concept} in two simple sentences."
+    )
+
+    # 3. Create the Chain using LCEL (the pipe operator '|')
+    # The output of the prompt goes into the LLM, and the LLM's raw response goes into the parser
+    chain = prompt | llm | StrOutputParser()
+
+    # 4. Invoke the chain with dynamic variables
+    concept_to_learn = "Prompt Engineering"
+    print(f"Asking about: {concept_to_learn}")
+    
+    result = chain.invoke({"concept": concept_to_learn})
+    
+    print("\n--- Result ---")
+    print(result)
+
+if __name__ == "__main__":
+    run_langchain_example()
+
 ```
 """
                     }
@@ -690,36 +710,78 @@ To index and retrieve embeddings efficiently, we use a specialized database: a *
 
 ### Code Example: Local ChromaDB Operations
 ```python
-# Install: pip install chromadb
+# 4_rag_example.py
 import chromadb
+from google import genai
+import os
 
-# Initialize local persistent client
-chroma_client = chromadb.PersistentClient(path="./chroma_db")
+"""
+# Retrieval-Augmented Generation (RAG) Example
+RAG is the process of fetching private or real-time data from a database and providing it 
+to the LLM as context, so it can answer questions based on your specific documents rather than just its training data.
 
-# Create a collection. ChromaDB has a default embedding model (SentenceTransformers)
-# but we can also supply custom embedding functions.
-collection = chroma_client.get_or_create_collection(name="workshop_guidelines")
+This example:
+1. Embeds some sample documents.
+2. Stores them in a local ChromaDB vector database.
+3. Retrieves the most relevant document based on a query.
+4. Uses Gemini to answer the query using ONLY the retrieved document.
+"""
 
-# Add documents
-collection.add(
-    documents=[
-        "Students need 80% attendance to qualify for the workshop certificate.",
-        "Day 1 project submission is due before Day 2 classes start.",
-        "The Capstone project requires students to submit both code and a hosted demo."
-    ],
-    ids=["doc1", "doc2", "doc3"],
-    metadatas=[{"type": "attendance"}, {"type": "deadline"}, {"type": "capstone"}]
-)
+def run_rag_example():
+    # 1. Setup Local Vector DB (Chroma)
+    print("Initializing ChromaDB...")
+    chroma_client = chromadb.Client() # In-memory for example purposes
+    collection = chroma_client.get_or_create_collection(name="internal_kb")
+    
+    # 2. Ingestion: Add some sample knowledge base documents
+    print("Ingesting documents into vector database...")
+    documents = [
+        "Company policy requires employees to take at least 15 days of PTO per year.",
+        "The WiFi password for the guest network in the New York office is 'WelcomeNYC2026'.",
+        "Expense reports for travel must be submitted within 30 days of the trip return date."
+    ]
+    ids = ["doc1", "doc2", "doc3"]
+    
+    # Chroma handles embedding automatically under the hood using a default model, 
+    # but in production, you would embed these with Google GenAI embeddings.
+    collection.add(documents=documents, ids=ids)
+    
+    # 3. Retrieval: Search for the answer
+    user_query = "What is the guest wifi password for NY?"
+    print(f"\nUser Query: {user_query}")
+    print("Retrieving relevant context from database...")
+    
+    results = collection.query(
+        query_texts=[user_query],
+        n_results=1 # Just get the top 1 most relevant document
+    )
+    
+    retrieved_context = results['documents'][0][0]
+    print(f"Found Context: '{retrieved_context}'")
+    
+    # 4. Generation: Pass context to LLM
+    print("Generating answer using Gemini...")
+    client = genai.Client()
+    
+    prompt = f"""
+    You are a helpful company assistant. Answer the user's question using ONLY the provided context.
+    If the context does not contain the answer, say "I don't know".
+    
+    Context: {retrieved_context}
+    
+    Question: {user_query}
+    """
+    
+    response = client.models.generate_content(
+        model='gemini-1.5-flash',
+        contents=prompt
+    )
+    
+    print(f"\nFinal AI Answer:\n{response.text}")
 
-# Query the collection
-results = collection.query(
-    query_texts=["Is there an attendance requirement?"],
-    n_results=1
-)
+if __name__ == "__main__":
+    run_rag_example()
 
-print("Query: Is there an attendance requirement?")
-print(f"Found document: {results['documents'][0][0]}")
-print(f"Similarity Distance: {results['distances'][0][0]}")
 ```
 """
                     }
@@ -752,61 +814,89 @@ Standard LangChain works for linear pipelines. But complex AI applications don't
 
 ### Code Example: A Stateful Router Graph
 ```python
-# Install: pip install langgraph
+# 2_langgraph_example.py
 from typing import TypedDict, Literal
 from langgraph.graph import StateGraph, START, END
 
+"""
+# LangGraph Example
+LangGraph is built on top of LangChain to create stateful, multi-actor, and cyclic workflows (like Agents).
+Instead of a simple straight-line pipeline, LangGraph lets you build a directed graph where state is passed between nodes,
+and conditional edges decide what to do next based on the state.
+
+This script demonstrates a basic Router Graph without hitting a live LLM, purely to show graph mechanics.
+"""
+
 # 1. Define the State
+# The State is a dictionary that is passed between nodes. Each node can update it.
 class GraphState(TypedDict):
-    question: str
-    category: str
-    answer: str
+    query: str
+    intent: str
+    response: str
 
-# 2. Define Nodes (Work Units)
-def classify_question(state: GraphState):
-    # Mock classifier logic (real world would call Gemini)
-    q = state["question"].lower()
-    category = "technical" if "code" in q or "error" in q else "general"
-    return {"category": category}
+# 2. Define the Nodes
+# Nodes are Python functions that receive the state, perform logic, and return updates to the state.
+def classify_intent_node(state: GraphState):
+    print(f"[Node: Classify] Analyzing query: '{state['query']}'")
+    query = state["query"].lower()
+    
+    if "refund" in query or "money" in query:
+        return {"intent": "billing"}
+    else:
+        return {"intent": "general"}
 
-def handle_technical(state: GraphState):
-    return {"answer": "Parsing code logs... Let's review the stack trace."}
+def billing_node(state: GraphState):
+    print("[Node: Billing] Handling billing request...")
+    return {"response": "I see you have a question about billing. I'll connect you to finance."}
 
-def handle_general(state: GraphState):
-    return {"answer": "Greeting! How can I help you learn today?"}
+def general_node(state: GraphState):
+    print("[Node: General] Handling general request...")
+    return {"response": "How can I help you with our platform today?"}
 
-# 3. Define Conditional Router
-def route_decision(state: GraphState) -> Literal["technical", "general"]:
-    return state["category"]
+# 3. Define the Conditional Router
+def route_based_on_intent(state: GraphState) -> Literal["billing", "general"]:
+    print(f"[Router] Routing to -> {state['intent']}")
+    return state["intent"]
 
-# 4. Build the Graph
-workflow = StateGraph(GraphState)
+def run_langgraph_example():
+    # 4. Build the Graph
+    workflow = StateGraph(GraphState)
+    
+    # Add nodes to the graph
+    workflow.add_node("classify", classify_intent_node)
+    workflow.add_node("billing", billing_node)
+    workflow.add_node("general", general_node)
+    
+    # Define edges (the flow)
+    workflow.add_edge(START, "classify")
+    
+    # Conditional edge branches off based on the router function
+    workflow.add_conditional_edges(
+        "classify", 
+        route_based_on_intent,
+        {
+            "billing": "billing",
+            "general": "general"
+        }
+    )
+    
+    workflow.add_edge("billing", END)
+    workflow.add_edge("general", END)
+    
+    # Compile it into a runnable app
+    app = workflow.compile()
+    
+    print("--- Test 1 ---")
+    result1 = app.invoke({"query": "I want a refund for my last invoice."})
+    print(f"Final Response: {result1['response']}\n")
 
-# Add Nodes
-workflow.add_node("classify", classify_question)
-workflow.add_node("technical", handle_technical)
-workflow.add_node("general", handle_general)
+    print("--- Test 2 ---")
+    result2 = app.invoke({"query": "How do I change my profile picture?"})
+    print(f"Final Response: {result2['response']}\n")
 
-# Add Edges
-workflow.add_edge(START, "classify")
-workflow.add_conditional_edges(
-    "classify",
-    route_decision,
-    {
-        "technical": "technical",
-        "general": "general"
-    }
-)
-workflow.add_edge("technical", END)
-workflow.add_edge("general", END)
+if __name__ == "__main__":
+    run_langgraph_example()
 
-# Compile Graph
-app = workflow.compile()
-
-# Run the Graph
-result = app.invoke({"question": "Help, my code is throwing a SyntaxError!"})
-print(f"Question Category: {result['category']}")
-print(f"Response: {result['answer']}")
 ```
 """
                     }
