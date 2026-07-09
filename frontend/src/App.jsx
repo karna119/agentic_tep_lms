@@ -65,81 +65,97 @@ export default function App() {
     setRegisterEmail(email);
   };
 
-  if (loading) {
-    return (
-      <div className="min-h-screen bg-bg-dark flex items-center justify-center">
-        <div className="text-center space-y-4">
-          <div className="w-14 h-14 border-4 border-primary border-t-transparent rounded-full animate-spin mx-auto shadow-lg shadow-primary/30"></div>
-          <p className="text-xs text-slate-400 uppercase tracking-widest font-semibold">Initializing AGENTIC 003 LMS...</p>
+  const renderContent = () => {
+    if (loading) {
+      return (
+        <div className="min-h-screen bg-bg-dark flex items-center justify-center">
+          <div className="text-center space-y-4">
+            <div className="w-14 h-14 border-4 border-primary border-t-transparent rounded-full animate-spin mx-auto shadow-lg shadow-primary/30"></div>
+            <p className="text-xs text-slate-400 uppercase tracking-widest font-semibold">Initializing AGENTIC 003 LMS...</p>
+          </div>
         </div>
+      );
+    }
+
+    switch (currentPage) {
+      case 'landing':
+        return (
+          <LandingPage 
+            onNavigate={handleNavigate}
+            onRegisterSuccess={handleRegisterSuccess}
+          />
+        );
+
+      case 'login':
+        return (
+          <LoginPage 
+            onLoginSuccess={handleLoginSuccess}
+            onNavigate={handleNavigate}
+            defaultEmail={registerEmail}
+          />
+        );
+
+      case 'dashboard':
+        if (!user) {
+          setCurrentPage('login');
+          return null;
+        }
+        return (
+          <StudentDashboard
+            user={user}
+            onLogout={handleLogout}
+            onStartLesson={handleStartLesson}
+            onNavigate={handleNavigate}
+          />
+        );
+
+      case 'course_player':
+        if (!user) {
+          setCurrentPage('login');
+          return null;
+        }
+        return (
+          <CoursePlayer
+            user={user}
+            initialDay={courseDay}
+            initialTopicId={courseTopicId}
+            onBackToDashboard={() => setCurrentPage('dashboard')}
+          />
+        );
+
+      case 'admin_panel':
+        if (!user || user.role !== 'admin') {
+          setCurrentPage('dashboard');
+          return null;
+        }
+        return (
+          <AdminPanel
+            user={user}
+            onBackToDashboard={() => setCurrentPage('dashboard')}
+          />
+        );
+
+      default:
+        return (
+          <LandingPage 
+            onNavigate={handleNavigate}
+            onRegisterSuccess={handleRegisterSuccess}
+          />
+        );
+    }
+  };
+
+  return (
+    <>
+      <div className="fixed top-4 left-6 z-[9999] pointer-events-none">
+        <img 
+          src="https://bytexl.in/assets/images/logo.png" 
+          alt="ByteXL Logo" 
+          className="h-10 w-auto object-contain drop-shadow-md"
+          onError={(e) => { e.target.src = 'https://bytexl.com/assets/images/logo.png'; }}
+        />
       </div>
-    );
-  }
-
-  switch (currentPage) {
-    case 'landing':
-      return (
-        <LandingPage 
-          onNavigate={handleNavigate}
-          onRegisterSuccess={handleRegisterSuccess}
-        />
-      );
-
-    case 'login':
-      return (
-        <LoginPage 
-          onLoginSuccess={handleLoginSuccess}
-          onNavigate={handleNavigate}
-          defaultEmail={registerEmail}
-        />
-      );
-
-    case 'dashboard':
-      if (!user) {
-        setCurrentPage('login');
-        return null;
-      }
-      return (
-        <StudentDashboard
-          user={user}
-          onLogout={handleLogout}
-          onStartLesson={handleStartLesson}
-          onNavigate={handleNavigate}
-        />
-      );
-
-    case 'course_player':
-      if (!user) {
-        setCurrentPage('login');
-        return null;
-      }
-      return (
-        <CoursePlayer
-          user={user}
-          initialDay={courseDay}
-          initialTopicId={courseTopicId}
-          onBackToDashboard={() => setCurrentPage('dashboard')}
-        />
-      );
-
-    case 'admin_panel':
-      if (!user || user.role !== 'admin') {
-        setCurrentPage('dashboard');
-        return null;
-      }
-      return (
-        <AdminPanel
-          user={user}
-          onBackToDashboard={() => setCurrentPage('dashboard')}
-        />
-      );
-
-    default:
-      return (
-        <LandingPage 
-          onNavigate={handleNavigate}
-          onRegisterSuccess={handleRegisterSuccess}
-        />
-      );
-  }
+      {renderContent()}
+    </>
+  );
 }
