@@ -10,6 +10,24 @@
     <meta property="og:description" content="Build production-grade Agentic AI apps in 3 days — Gemini, RAG, LangGraph, CrewAI, MCP, and beyond." />
     <meta property="og:type" content="website" />
     <title>AGENTIC 003 | AI Workshop LMS</title>
+    <script>
+      // Disable right click
+      document.addEventListener('contextmenu', event => event.preventDefault());
+
+      // Disable F12, Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+U
+      document.onkeydown = function(e) {
+        if (
+          e.keyCode === 123 || // F12
+          (e.ctrlKey && e.shiftKey && e.keyCode === 73) || // Ctrl+Shift+I
+          (e.ctrlKey && e.shiftKey && e.keyCode === 74) || // Ctrl+Shift+J
+          (e.ctrlKey && e.keyCode === 85) || // Ctrl+U
+          (e.metaKey && e.altKey && e.keyCode === 73) || // Cmd+Option+I (Mac)
+          (e.metaKey && e.altKey && e.keyCode === 74) // Cmd+Option+J (Mac)
+        ) {
+          e.preventDefault();
+        }
+      };
+    </script>
   </head>
   <body>
     <div id="root"></div>
