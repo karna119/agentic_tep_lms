@@ -146,16 +146,18 @@ export default function App() {
   };
 
   return (
-    <>
-      <div className="fixed top-4 left-6 z-[9999] pointer-events-none">
+    <div className="bg-bg-dark w-full">
+      {/* Non-overlapping header specifically for the Logo */}
+      <header className="w-full bg-bg-dark px-6 py-4 flex items-center border-b border-white/5 relative z-[9999]">
         <img 
-          src="https://bytexl.in/assets/images/logo.png" 
+          src="/logo.png" 
           alt="ByteXL Logo" 
-          className="h-10 w-auto object-contain drop-shadow-md"
-          onError={(e) => { e.target.src = 'https://bytexl.com/assets/images/logo.png'; }}
+          className="h-10 w-auto object-contain"
         />
-      </div>
-      {renderContent()}
-    </>
+      </header>
+      <main>
+        {renderContent()}
+      </main>
+    </div>
   );
 }
