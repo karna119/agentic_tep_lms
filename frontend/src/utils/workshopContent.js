@@ -1058,26 +1058,8 @@ def grade_documents(state):
       title: "Student Academic Advisor Agent",
       problem: `Students need tailored suggestions on course pathways, credit transfers, and workload management. Build a 'Student Academic Advisor Agent' using LangGraph with ChromaDB RAG for academic handbook retrieval and a Gemini Planner that creates personalized study plans.
 
-### Alternate Capstone Project Options (15 Domains)
-You can choose to build the default academic advisor, or select one of the following 15 industry-specific projects for your capstone submission:
-
-| Domain                  | Project Title                               | Problem Solved                                     | Core Features (2–3)                                                                                                      |
-| ----------------------- | ------------------------------------------- | -------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
-| **Education**           | **Agentic AI Learning Gap Investigator**    | Teachers don't know *why* students struggle.       | 1. Analyze quiz results.<br>2. Identify concept-wise learning gaps.<br>3. Generate personalized remedial plans.          |
-| **Education**           | **Agentic AI Lab Experiment Evaluator**     | Manual lab assessment is time-consuming.           | 1. Observe experiment execution via video.<br>2. Detect incorrect procedural steps.<br>3. Generate improvement feedback. |
-| **Healthcare**          | **Agentic AI Medication Adherence Coach**   | Patients often miss medications.                   | 1. Verify medicine intake using image recognition.<br>2. Detect missed doses.<br>3. Create adaptive reminder schedules.  |
-| **Agriculture**         | **Agentic AI Irrigation Planner**           | Water is wasted due to fixed irrigation schedules. | 1. Monitor soil moisture.<br>2. Predict irrigation needs.<br>3. Recommend watering schedules.                            |
-| **Agriculture**         | **Agentic AI Pest Outbreak Predictor**      | Farmers react after pests spread.                  | 1. Detect early pest indicators.<br>2. Predict outbreak risk.<br>3. Recommend preventive measures.                       |
-| **Retail**              | **Agentic AI Dynamic Price Advisor**        | Static pricing reduces competitiveness.            | 1. Analyze demand trends.<br>2. Monitor inventory levels.<br>3. Suggest optimal pricing.                                 |
-| **Manufacturing**       | **Agentic AI Root Cause Investigator**      | Finding causes of defects is slow.                 | 1. Detect product defects.<br>2. Analyze production logs.<br>3. Recommend likely root causes.                            |
-| **Smart Cities**        | **Agentic AI Streetlight Optimizer**        | Streetlights remain on unnecessarily.              | 1. Detect pedestrian/vehicle activity.<br>2. Predict usage patterns.<br>3. Recommend lighting schedules.                 |
-| **Environment**         | **Agentic AI River Pollution Investigator** | Pollution sources are difficult to trace.          | 1. Analyze water quality data.<br>2. Identify likely pollution sources.<br>3. Generate intervention reports.             |
-| **Corporate**           | **Agentic AI Meeting Health Analyzer**      | Meetings are often unproductive.                   | 1. Measure speaking balance.<br>2. Detect engagement trends.<br>3. Generate productivity recommendations.                |
-| **Cybersecurity**       | **Agentic AI Insider Threat Investigator**  | Internal threats are hard to identify.             | 1. Detect unusual user activity.<br>2. Correlate access patterns.<br>3. Recommend security actions.                      |
-| **Energy**              | **Agentic AI Building Energy Optimizer**    | Buildings consume excess energy.                   | 1. Monitor occupancy.<br>2. Predict energy demand.<br>3. Recommend HVAC and lighting adjustments.                        |
-| **Sports**              | **Agentic AI Cricket Strategy Assistant**   | Coaches need quick tactical insights.              | 1. Analyze player positioning.<br>2. Detect tactical weaknesses.<br>3. Recommend field placements.                       |
-| **Tourism**             | **Agentic AI Crowd Experience Manager**     | Tourist attractions become overcrowded.            | 1. Monitor crowd density.<br>2. Predict congestion.<br>3. Recommend alternate routes.                                    |
-| **Disaster Management** | **Agentic AI Emergency Resource Planner**   | Emergency resources are allocated inefficiently.   | 1. Assess incident severity.<br>2. Prioritize response.<br>3. Recommend deployment of available resources.               |`,
+### Alternate Capstone Project Options
+Click on the **💡 More Project Ideas** tab in the left sidebar to view the 15 industry-specific project problem statements.`,
       architecture: "User Question → Router Node → Query ChromaDB → LLM Planner → Workload Validation → Corrected Schedule → Student Report",
       workflow: "1. Student enters current credits and career interest.\n2. LangGraph state initializes.\n3. Retriever checks handbook policies.\n4. Planner schedules recommended courses.\n5. Validator checks workload balance.\n6. UI displays the semester timeline.",
       folder_structure: "student_advisor/\n├── graph.py\n├── db.py\n├── app.py\n├── data/\n│   └── courses.json\n└── requirements.txt",

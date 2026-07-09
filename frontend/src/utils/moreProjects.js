@@ -1,0 +1,17 @@
+export const moreProjects = [
+  { domain: "Education", title: "Agentic AI Learning Gap Investigator", problem: "Teachers don't know why students struggle.", features: ["Analyze quiz results.", "Identify concept-wise learning gaps.", "Generate personalized remedial plans."] },
+  { domain: "Education", title: "Agentic AI Lab Experiment Evaluator", problem: "Manual lab assessment is time-consuming.", features: ["Observe experiment execution via video.", "Detect incorrect procedural steps.", "Generate improvement feedback."] },
+  { domain: "Healthcare", title: "Agentic AI Medication Adherence Coach", problem: "Patients often miss medications.", features: ["Verify medicine intake using image recognition.", "Detect missed doses.", "Create adaptive reminder schedules."] },
+  { domain: "Agriculture", title: "Agentic AI Irrigation Planner", problem: "Water is wasted due to fixed irrigation schedules.", features: ["Monitor soil moisture.", "Predict irrigation needs.", "Recommend watering schedules."] },
+  { domain: "Agriculture", title: "Agentic AI Pest Outbreak Predictor", problem: "Farmers react after pests spread.", features: ["Detect early pest indicators.", "Predict outbreak risk.", "Recommend preventive measures."] },
+  { domain: "Retail", title: "Agentic AI Dynamic Price Advisor", problem: "Static pricing reduces competitiveness.", features: ["Analyze demand trends.", "Monitor inventory levels.", "Suggest optimal pricing."] },
+  { domain: "Manufacturing", title: "Agentic AI Root Cause Investigator", problem: "Finding causes of defects is slow.", features: ["Detect product defects.", "Analyze production logs.", "Recommend likely root causes."] },
+  { domain: "Smart Cities", title: "Agentic AI Streetlight Optimizer", problem: "Streetlights remain on unnecessarily.", features: ["Detect pedestrian/vehicle activity.", "Predict usage patterns.", "Recommend lighting schedules."] },
+  { domain: "Environment", title: "Agentic AI River Pollution Investigator", problem: "Pollution sources are difficult to trace.", features: ["Analyze water quality data.", "Identify likely pollution sources.", "Generate intervention reports."] },
+  { domain: "Corporate", title: "Agentic AI Meeting Health Analyzer", problem: "Meetings are often unproductive.", features: ["Measure speaking balance.", "Detect engagement trends.", "Generate productivity recommendations."] },
+  { domain: "Cybersecurity", title: "Agentic AI Insider Threat Investigator", problem: "Internal threats are hard to identify.", features: ["Detect unusual user activity.", "Correlate access patterns.", "Recommend security actions."] },
+  { domain: "Energy", title: "Agentic AI Building Energy Optimizer", problem: "Buildings consume excess energy.", features: ["Monitor occupancy.", "Predict energy demand.", "Recommend HVAC and lighting adjustments."] },
+  { domain: "Sports", title: "Agentic AI Cricket Strategy Assistant", problem: "Coaches need quick tactical insights.", features: ["Analyze player positioning.", "Detect tactical weaknesses.", "Recommend field placements."] },
+  { domain: "Tourism", title: "Agentic AI Crowd Experience Manager", problem: "Tourist attractions become overcrowded.", features: ["Monitor crowd density.", "Predict congestion.", "Recommend alternate routes."] },
+  { domain: "Disaster Management", title: "Agentic AI Emergency Resource Planner", problem: "Emergency resources are allocated inefficiently.", features: ["Assess incident severity.", "Prioritize response.", "Recommend deployment of available resources."] }
+];

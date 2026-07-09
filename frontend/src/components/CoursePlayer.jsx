@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import Editor from '@monaco-editor/react';
+import { moreProjects } from '../utils/moreProjects';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { api } from '../utils/api';
@@ -595,6 +596,19 @@ export default function CoursePlayer({ user, initialDay, initialTopicId, onBackT
                   {projectStatus === 'pending' && <span className="text-[9px] text-warning">⏳</span>}
                 </button>
               )}
+
+              {/* More Projects Tab Button */}
+              {projectData && (
+                <button
+                  onClick={() => setActiveTab('more_projects')}
+                  className={`w-full text-left px-3 py-2 rounded-lg text-xs flex justify-between items-center gap-2 transition ${activeTab === 'more_projects'
+                    ? 'bg-secondary/20 text-white font-bold border-l-2 border-secondary'
+                    : 'text-slate-400 hover:bg-slate-900/80 hover:text-slate-200'
+                  }`}
+                >
+                  <span>💡 More Project Ideas</span>
+                </button>
+              )}
             </div>
           </div>
         </aside>
@@ -858,6 +872,40 @@ export default function CoursePlayer({ user, initialDay, initialTopicId, onBackT
                   {projectSubmitting ? 'Submitting...' : projectStatus !== 'not_submitted' ? '🔄 Resubmit Project' : '🚀 Submit Project'}
                 </button>
               </form>
+            </div>
+          )}
+
+          {/* More Projects Tab */}
+          {activeTab === 'more_projects' && (
+            <div className="space-y-6 max-w-3xl mx-auto">
+              <div>
+                <span className="text-[10px] text-accent font-mono uppercase tracking-widest">Alternative Options</span>
+                <h1 className="text-2xl font-extrabold text-white mt-1">15 Industry-Specific Capstone Projects</h1>
+                <p className="text-sm text-slate-400 mt-2">
+                  You can choose to build the default academic advisor, or select one of these industry-specific projects for your capstone submission.
+                </p>
+              </div>
+
+              <div className="h-px bg-gradient-to-r from-secondary/30 via-accent/20 to-transparent"></div>
+
+              <div className="space-y-4">
+                {moreProjects.map((proj, idx) => (
+                  <div key={idx} className="p-5 rounded-2xl bg-card-dark/40 border border-white/5">
+                    <span className="inline-block px-2.5 py-1 rounded bg-secondary/20 text-secondary text-[10px] font-black uppercase tracking-widest mb-3 border border-secondary/30">
+                      {proj.domain}
+                    </span>
+                    <h3 className="text-lg font-bold text-white mb-2">{proj.title}</h3>
+                    <p className="text-sm text-slate-300 mb-4"><strong>Problem Solved:</strong> {proj.problem}</p>
+                    
+                    <h4 className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-2">Core Features:</h4>
+                    <ul className="space-y-1 pl-4">
+                      {proj.features.map((feat, fIdx) => (
+                        <li key={fIdx} className="text-sm text-slate-300 list-disc">{feat}</li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
+              </div>
             </div>
           )}
         </section>
