@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;850;900&family=JetBrains+Mono:wght@400;500;600&display=swap');
 @import "tailwindcss";
 
 @theme {
@@ -9,7 +9,7 @@
   --color-warning: #FBBF24;
   --color-bg-dark: #0F1729;
   --color-card-dark: #1A2440;
-  --font-sans: 'Calibri', 'Calibri Light', 'Trebuchet MS', 'Gill Sans', Arial, sans-serif;
+  --font-sans: 'Outfit', sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
 }
 
@@ -17,28 +17,28 @@
 html, body {
   background-color: #0F1729;
   color: #F0F4FF;
-  font-family: 'Calibri', 'Calibri Light', 'Trebuchet MS', 'Gill Sans', Arial, sans-serif;
-  font-size: 21px;          /* was 18px → +3 */
+  font-family: 'Outfit', sans-serif;
+  font-size: 15px;
   scroll-behavior: smooth;
-  line-height: 1.65;
+  line-height: 1.5;
 }
 
-/* ── Override Tailwind text-size utilities upward ── */
-.text-\[8px\]    { font-size: 11px !important; }
-.text-\[9px\]    { font-size: 12px !important; }
-.text-\[10px\]   { font-size: 13px !important; }
-.text-\[11px\]   { font-size: 14px !important; }
-.text-\[12px\]   { font-size: 15px !important; }
-.text-xs         { font-size: 15px !important; }
-.text-sm         { font-size: 17px !important; }
-.text-base       { font-size: 21px !important; }
-.text-lg         { font-size: 24px !important; }
-.text-xl         { font-size: 27px !important; }
-.text-2xl        { font-size: 31px !important; }
-.text-3xl        { font-size: 37px !important; }
-.text-4xl        { font-size: 43px !important; }
-.text-5xl        { font-size: 51px !important; }
-.text-6xl        { font-size: 63px !important; }
+/* ── Standardized typography sizes ── */
+.text-\[8px\]    { font-size: 8px !important; }
+.text-\[9px\]    { font-size: 9px !important; }
+.text-\[10px\]   { font-size: 10px !important; }
+.text-\[11px\]   { font-size: 11px !important; }
+.text-\[12px\]   { font-size: 12px !important; }
+.text-xs         { font-size: 12px !important; }
+.text-sm         { font-size: 14px !important; }
+.text-base       { font-size: 15px !important; }
+.text-lg         { font-size: 18px !important; }
+.text-xl         { font-size: 21px !important; }
+.text-2xl        { font-size: 26px !important; }
+.text-3xl        { font-size: 32px !important; }
+.text-4xl        { font-size: 40px !important; }
+.text-5xl        { font-size: 48px !important; }
+.text-6xl        { font-size: 58px !important; }
 
 /* ── Brighter text overrides ── */
 .text-slate-100  { color: #FFFFFF !important; }
@@ -101,16 +101,16 @@ html, body {
 .prose-invert li,
 .prose-invert td {
   color: #D8E0F8 !important;
-  font-size: 17px !important;
-  line-height: 1.75 !important;
+  font-size: 14px !important;
+  line-height: 1.6 !important;
 }
 
 .prose-invert h1, .prose-invert h2 { color: #FFFFFF !important; }
-.prose-invert h3 { color: #FFFFFF !important; font-size: 20px !important; }
-.prose-invert h4 { color: #00E0FF !important; font-size: 17px !important; }
+.prose-invert h3 { color: #FFFFFF !important; font-size: 17px !important; }
+.prose-invert h4 { color: #00E0FF !important; font-size: 14px !important; }
 .prose-invert strong { color: #FFFFFF !important; }
-.prose-invert code { color: #00E0FF !important; font-size: 14px !important; }
-.prose-invert pre  { font-size: 14px !important; }
+.prose-invert code { color: #00E0FF !important; font-size: 12px !important; }
+.prose-invert pre  { font-size: 12px !important; }
 
 /* ── Scrollbars ── */
 ::-webkit-scrollbar { width: 8px; height: 8px; }
