@@ -169,8 +169,12 @@ export default function AdminPanel({ onBackToDashboard }) {
         </button>
 
         <div className="flex items-center gap-3">
-          <span className="font-extrabold text-base tracking-tight text-white block">AGENTIC 003</span>
-          <span className="text-[10px] bg-accent/20 text-accent font-bold px-2 py-0.5 rounded-md uppercase tracking-wider">Instructor Portal</span>
+          <img src="/logo.png" alt="ByteXL Logo" className="h-8 w-auto object-contain" />
+          <div className="h-6 w-px bg-white/15 mx-1" />
+          <div>
+            <span className="font-extrabold text-base tracking-tight text-white block">AGENTIC 003</span>
+            <span className="text-[10px] bg-accent/20 text-accent font-bold px-2 py-0.5 rounded-md uppercase tracking-wider">Instructor Portal</span>
+          </div>
         </div>
 
         <button 

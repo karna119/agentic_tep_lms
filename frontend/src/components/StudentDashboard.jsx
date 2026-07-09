@@ -89,9 +89,8 @@ export default function StudentDashboard({ user, onLogout, onStartLesson, onNavi
       {/* Nav */}
       <nav className="glass-panel border-b border-white/5 py-4 px-6 md:px-12 flex justify-between items-center relative z-20">
         <div className="flex items-center gap-3">
-          <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-primary to-accent flex items-center justify-center font-black text-slate-900 text-base">
-            🤖
-          </div>
+          <img src="/logo.png" alt="ByteXL Logo" className="h-8 w-auto object-contain" />
+          <div className="h-6 w-px bg-white/15 mx-1" />
           <div>
             <span className="font-extrabold text-base tracking-tight text-white block">AGENTIC 003</span>
             <span className="text-[9px] text-accent tracking-widest uppercase font-semibold">Student Hub</span>

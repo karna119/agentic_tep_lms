@@ -57,9 +57,8 @@ export default function LoginPage({ onLoginSuccess, onNavigate, defaultEmail = '
 
           {/* Logo */}
           <div className="flex items-center gap-3 mb-8">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-primary to-accent flex items-center justify-center font-black text-slate-900 text-lg">
-              🤖
-            </div>
+            <img src="/logo.png" alt="ByteXL Logo" className="h-9 w-auto object-contain" />
+            <div className="h-6 w-px bg-white/15 mx-1" />
             <div>
               <span className="font-extrabold text-lg tracking-tight text-white block">AGENTIC 003</span>
               <span className="text-[10px] text-accent tracking-widest uppercase font-semibold">LMS Secure Login</span>

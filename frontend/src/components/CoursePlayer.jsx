@@ -452,12 +452,16 @@ export default function CoursePlayer({ user, initialDay, initialTopicId, onBackT
 
       {/* ── TOP HEADER ── */}
       <header className="sticky top-0 z-50 glass-panel border-b border-white/5 py-3 px-4 md:px-6 flex justify-between items-center shrink-0 gap-4">
-        <button
-          onClick={onBackToDashboard}
-          className="flex items-center gap-2 text-xs text-slate-400 hover:text-white transition group shrink-0"
-        >
-          <ArrowLeft size={14} className="group-hover:-translate-x-0.5 transition" /> Dashboard
-        </button>
+        <div className="flex items-center gap-3 shrink-0">
+          <img src="/logo.png" alt="ByteXL Logo" className="h-7 w-auto object-contain" />
+          <div className="h-5 w-px bg-white/15 mx-1" />
+          <button
+            onClick={onBackToDashboard}
+            className="flex items-center gap-2 text-xs text-slate-400 hover:text-white transition group"
+          >
+            <ArrowLeft size={14} className="group-hover:-translate-x-0.5 transition" /> Dashboard
+          </button>
+        </div>
 
         {/* Centre: module title */}
         <div className="flex-1 min-w-0 text-center hidden md:block">

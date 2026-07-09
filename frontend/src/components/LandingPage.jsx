@@ -109,9 +109,8 @@ export default function LandingPage({ onNavigate, onRegisterSuccess }) {
       {/* ── HEADER ── */}
       <header className="sticky top-0 z-50 glass-panel border-b border-white/8 py-4 px-6 md:px-14 flex justify-between items-center">
         <div className="flex items-center gap-3">
-          <div className="w-11 h-11 rounded-2xl bg-gradient-to-tr from-primary to-accent flex items-center justify-center text-2xl shadow-lg shadow-primary/25">
-            🤖
-          </div>
+          <img src="/logo.png" alt="ByteXL Logo" className="h-10 w-auto object-contain" />
+          <div className="h-8 w-px bg-white/15 mx-1" />
           <div>
             <span className="font-black text-xl tracking-tight text-white block leading-none">AGENTIC 003</span>
             <span className="text-xs text-accent tracking-widest uppercase font-bold">LMS Platform</span>

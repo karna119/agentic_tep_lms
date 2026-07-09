@@ -147,14 +147,6 @@ export default function App() {
 
   return (
     <div className="bg-bg-dark w-full">
-      {/* Non-overlapping header specifically for the Logo */}
-      <header className="w-full bg-bg-dark px-6 py-4 flex items-center border-b border-white/5 relative z-[9999]">
-        <img 
-          src="/logo.png" 
-          alt="ByteXL Logo" 
-          className="h-10 w-auto object-contain"
-        />
-      </header>
       <main>
         {renderContent()}
       </main>
